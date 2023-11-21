@@ -14,30 +14,29 @@ class CrearMedicamento extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       //==================== AppBar ===========================
-    appBar: AppBar(
-      backgroundColor: Colors.green,
-      actions: [
-          IconButton(
-            onPressed: (){
-              final destino = MaterialPageRoute(builder: (_) => VentanaPrincipal());
-              Navigator.push(context, destino);
-            }, 
-            icon: Icon(Icons.home))
-        ],
-      ),
+    
 
     //==================== Body ===========================
 
     body: Container(
-      child: DefaultTextStyle(
-        style: const TextStyle(),
-        child: Center(
+      color: Colors.white,
+      child: Align(
+        alignment: Alignment(0,0.5),
           child: Container(
-            padding: const EdgeInsets.only(
-                  left: 15, 
-                  top: 15, 
-                  bottom: 30, 
-                  right: 15),
+            width: 380, 
+            height: 710,
+
+            decoration: const BoxDecoration(
+            color: Colors.green,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+              bottomLeft: Radius.circular(20)
+            ),
+          ),
+
+
           child:  const DefaultTextStyle(
           style: TextStyle(
             color: Colors.grey,
@@ -47,47 +46,65 @@ class CrearMedicamento extends StatelessWidget {
           
           child:  Column(
             children: [
-
-              Center(
+              
+            
+              Padding(
+                padding: EdgeInsets.only(top: 40),
                 child: Text("Agregar medicamento",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 40,
-                  color: Colors.green,
+                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                   
                 ),),
               ),
 
               Padding(
-                padding: const EdgeInsets.only(top: 50, bottom: 20),
+                padding: const EdgeInsets.only(top: 70, bottom: 10),
                 child: Text("¿Cada cuánto debe tomar el medicamento?",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.green,
+                  fontSize: 25,
+                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                   
                 ),),
               ),
              
-             TextField(
-              decoration: InputDecoration(
-                border: UnderlineInputBorder(),
-              ),
-              keyboardType: TextInputType.number,
+             Padding(
+               padding: EdgeInsets.symmetric(horizontal: 30),
+               child: TextField(
+                decoration: InputDecoration(
+                  enabledBorder: UnderlineInputBorder(borderSide :BorderSide(color: Colors.white, width: 3)),
+                ),
+                keyboardType: TextInputType.number,
+               ),
              ),
 
-              // child: DropdownButton<String>(
-              //    value: selectedItem,
-              //    items: items.map((item) => DropdownMenuItem<String>(
-              //     value: item, child: Text(item, style: TextStyle(fontSize: 24))))
-              //     .toList(),
-              //    onChanged: (value) {
-                    
-              //     },
-              //   )
-           
+              Padding(
+                padding: const EdgeInsets.only(top: 150, bottom: 10),
+                child: Text("¿Cuánta cantidad viene en cada envase?",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  
+                ),),
+              ),
+             
+             Padding(
+               padding: EdgeInsets.symmetric(horizontal: 30),
+               child: TextField(
+                decoration: InputDecoration(
+                  enabledBorder: UnderlineInputBorder(borderSide :BorderSide(color: Colors.white, width: 3)),
+                ),
+                keyboardType: TextInputType.number,
+               ),
+             ),
+
+
             ],
             ),
         ),
@@ -95,22 +112,41 @@ class CrearMedicamento extends StatelessWidget {
           
           
           
-        ),
+        
         ),
         
     ),
 
     //==================== Menú inferior ===========================
 
-    bottomNavigationBar: BottomNavigationBar(items: const [
+    bottomNavigationBar: BottomNavigationBar(
+    
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      unselectedItemColor: Colors.green,
+      selectedItemColor: Colors.green,
+      
+      items: const [
           //no se pueden pasar widgets, sino elementos de la clase bottonNavigationBarItem
           BottomNavigationBarItem(
             //ajuste del icono del boton inferior
-            icon: Icon(Icons.skip_previous),
+            icon: Icon(Icons.skip_previous,color: Colors.green),
             label: "Atrás",
+            
+
+            ),
+            BottomNavigationBarItem(
+            //ajuste del icono del boton inferior
+            icon: Icon(
+              Icons.home,
+              color: Colors.green,
+              ),
+            label: "Inicio",
+            
+            
             ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.skip_next),
+            icon: Icon(Icons.skip_next,color: Colors.green),
             label: "Siguiente"),
         ],
 
@@ -122,6 +158,11 @@ class CrearMedicamento extends StatelessWidget {
             break;
 
             case 1:
+              final destino = MaterialPageRoute(builder: (_) => VentanaPrincipal());
+              Navigator.push(context, destino);
+            break;
+            
+            case 2:
               final destino = MaterialPageRoute(builder: (_) => CrearMedicamento2());
               Navigator.push(context, destino);
             break;
