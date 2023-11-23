@@ -8,9 +8,6 @@ import 'package:flutter/material.dart';
 
 class CrearMedicamento2 extends StatelessWidget {
 
-  List<String> items = ['Item1', 'Item2'];
-  String? selectedItem = 'Item1';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +46,7 @@ class CrearMedicamento2 extends StatelessWidget {
             children: [
 
               Padding(
-                padding: EdgeInsets.only(top: 40),
+                padding: EdgeInsets.only(top: 70),
                 child: Text("Agregar medicamento",
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -62,7 +59,7 @@ class CrearMedicamento2 extends StatelessWidget {
 
               Padding(
                 padding: const EdgeInsets.only(top: 70, bottom: 10),
-                child: Text("¿Cada cuánto debe tomar el medicamento?",
+                child: Text("¿Tiene alguna norma de consumo?",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25,
@@ -72,17 +69,68 @@ class CrearMedicamento2 extends StatelessWidget {
                 ),),
               ),
              
-             Padding(
-               padding: EdgeInsets.symmetric(horizontal: 30),
+             SizedBox(
+               width: 350,
+               height: 150,
                child: TextField(
+                
                 decoration: InputDecoration(
-                  enabledBorder: UnderlineInputBorder(borderSide :BorderSide(color: Colors.white, width: 3)),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white, width: 3),
+
+                  ),
+                  
                 ),
-                keyboardType: TextInputType.number,
+
                ),
              ),
 
-              
+             
+              Padding(
+                padding: const EdgeInsets.only(top: 0, bottom: 10, left: 80),
+                child: Row(
+                  children: [
+                      Text("Foto del envase",
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                  
+                      ),),
+
+                      // hago iconos para que se vea mejor y sea mas intuitivo
+
+                      Icon(Icons.photo,
+                      color: Colors.white,
+                      size: 80,
+                      ),
+                  ],
+                )
+                
+
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(top: 0, bottom: 10, left: 45),
+                child: Row(
+                  children: [
+                      Text("Foto de las pastillas",
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                  
+                      ),),
+
+                      Icon(Icons.photo,
+                      color: Colors.white,
+                      size: 80,
+                      ),
+                  ],
+                )
+                
+
+              ),
            
             ],
             ),
@@ -125,7 +173,7 @@ class CrearMedicamento2 extends StatelessWidget {
             
             ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.skip_next,color: Colors.green),
+            icon: Icon(Icons.check,color: Colors.green),
             label: "Siguiente"),
         ],
 
@@ -140,7 +188,10 @@ class CrearMedicamento2 extends StatelessWidget {
               final destino = MaterialPageRoute(builder: (_) => VentanaPrincipal());
               Navigator.push(context, destino);
             break;
-            
+
+            case 2:
+             final destino = MaterialPageRoute(builder: (_) => VentanaPrincipal());
+              Navigator.push(context, destino);
             
             break;
           }

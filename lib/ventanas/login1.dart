@@ -1,11 +1,16 @@
 
 
+import 'package:app_medicamentos/ventanas/bienvenida.dart';
 import 'package:app_medicamentos/ventanas/crear_medicamento2.dart';
+import 'package:app_medicamentos/ventanas/login2.dart';
 import 'package:app_medicamentos/ventanas/ventana_principal.dart';
 import 'package:flutter/material.dart';
 
 
-class CrearMedicamento extends StatelessWidget {
+class Login1 extends StatelessWidget {
+
+  // divido el login en varias pantallas para hacerlo mas facil al usuario
+  // pregunto para quien es la app para distintas funcionalidades futuras
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +51,8 @@ class CrearMedicamento extends StatelessWidget {
               
             
               Padding(
-                padding: EdgeInsets.only(top: 70),
-                child: Text("Agregar medicamento",
+                padding: EdgeInsets.only(top: 170),
+                child: Text("¿Para quién es",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 40,
@@ -56,64 +61,70 @@ class CrearMedicamento extends StatelessWidget {
                   
                 ),),
               ),
-
               Padding(
-                padding: const EdgeInsets.only(top: 70, bottom: 10),
-                child: Text("¿Cada cuánto debe tomar el medicamento?",
+                padding: EdgeInsets.only(top: 0, bottom: 30),
+                child: Text("esta aplicación?",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 25,
+                  fontSize: 50,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   
                 ),),
               ),
-             
 
-             //hago los textfield con bordes para que se vean bien
-             SizedBox(
-               width: 350,
-               height:70,
-               child: TextField(
-                
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white, width: 3),
+              Row(
+                children: [
+                  Column(
+                    
+                    // hago iconos muy grandes para que sea lo más fácil posible
 
+                    children: [
+                      Icon(
+                        Icons.person,
+                        size: 180,
+                        color: Colors.white,
+                        ),
+
+                      Center(
+                        child: Text(
+                          "Para mí",
+                          style: TextStyle(
+                            color: Colors.white
+                          ),
+                        ),
+                      ),
+                      
+                    ],
                   ),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(right: 20),
+                        child: Icon(
+                        Icons.person_add,
+                        size: 180,
+                        color: Colors.white,
+                        ),
+                        ),
+
+                      Center(
+                        child: Text(
+                          "Para otro",
+                          style: TextStyle(
+                            color: Colors.white
+                          ),
+                        ),
+                      ),
+                      
+                    ],
+                  )
                   
-                ),
-
-               ),
-             ),
-
-              Padding(
-                padding: const EdgeInsets.only(top: 80, bottom: 10),
-                child: Text("¿Cuánta cantidad viene en cada envase?",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
                   
-                ),),
-              ),
-             
-             SizedBox(
-               width: 350,
-               height: 150,
-               child: TextField(
-                
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white, width: 3),
-
-                  ),
                   
-                ),
-
-               ),
-             ),
+                ],
+              )
+              
 
 
             ],
@@ -129,9 +140,8 @@ class CrearMedicamento extends StatelessWidget {
     ),
 
     //==================== Menú inferior ===========================
-
-    //hago la barra inferior con 3 botones con iconos, para que sea más intuitivo
-    bottomNavigationBar: BottomNavigationBar(
+bottomNavigationBar: BottomNavigationBar(
+  
     
       showSelectedLabels: false,
       showUnselectedLabels: false,
@@ -146,14 +156,7 @@ class CrearMedicamento extends StatelessWidget {
             label: "Atrás",
             
 
-            ),
-            BottomNavigationBarItem(
-            //ajuste del icono del boton inferior
-            icon: Icon(
-              Icons.home,
-              color: Colors.green,
-              ),
-            label: "Inicio",
+           
             
             
             ),
@@ -165,23 +168,20 @@ class CrearMedicamento extends StatelessWidget {
         onTap: (value){
           switch(value){
             case 0:
-              final destino = MaterialPageRoute(builder: (_) => VentanaPrincipal());
+              final destino = MaterialPageRoute(builder: (_) => Bienvenida());
               Navigator.push(context, destino);
             break;
 
-            case 1:
-              final destino = MaterialPageRoute(builder: (_) => VentanaPrincipal());
-              Navigator.push(context, destino);
-            break;
             
-            case 2:
-              final destino = MaterialPageRoute(builder: (_) => CrearMedicamento2());
+            case 1:
+              final destino = MaterialPageRoute(builder: (_) => Login2());
               Navigator.push(context, destino);
             break;
           }
         }
 
     )
+    
     );
   }
 }

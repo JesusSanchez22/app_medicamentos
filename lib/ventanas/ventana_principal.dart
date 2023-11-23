@@ -43,13 +43,13 @@ class VentanaPrincipal extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 50,
+                    fontSize: 60,
                   ),
                 ),
               ),
 
               
-
+              //boton para reponer medicamentos, nos llevará a la farmacia más cercana
               Center(
                 child: TextButton(
                 style: ButtonStyle(
@@ -67,6 +67,8 @@ class VentanaPrincipal extends StatelessWidget {
                 )
                 ),
 
+
+              //list view vertical para ver cuanto podemos estar sin medicamentos
               Expanded(
 
                 child: ListView(
@@ -80,6 +82,8 @@ class VentanaPrincipal extends StatelessWidget {
                           topLeft: Radius.circular(12.0),
                           topRight: Radius.circular(12.0)
                           ),
+
+                          //los medicamentos que estén cerca de acabarse aparecerán en rojo
                         color: Colors.redAccent,
                       ),
                       height: 50,
@@ -114,7 +118,7 @@ class VentanaPrincipal extends StatelessWidget {
                     ),
                     Container(
                       decoration: const BoxDecoration(
-                        
+                        // los que falta bastante para que se acaben estarán en verde
                         color: Colors.lightGreen,
                       ),
                       height: 50,
@@ -234,6 +238,9 @@ class VentanaPrincipal extends StatelessWidget {
               ),
               ),
 
+
+              //list view horizontal para mostrar las proximas consumiciones, y las que ya han sucedido
+
               Expanded(
                 child: ListView(
                   shrinkWrap: true,
@@ -271,6 +278,7 @@ class VentanaPrincipal extends StatelessWidget {
                             const Padding(
                               padding: EdgeInsets.only(top: 15, left: 5, right: 5, bottom: 10),
                               child: Text(
+                                //las que todavia no se hayan consumido aparecerán en verde
                                 "Próxima consumición en:\n 2 horas",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -282,6 +290,7 @@ class VentanaPrincipal extends StatelessWidget {
                             ),
                             
                             Center(
+                              //boton para indicar si lo he tomado o no 
                               child: TextButton(
                                 style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all
@@ -328,6 +337,8 @@ class VentanaPrincipal extends StatelessWidget {
                         borderRadius: BorderRadius.only(
                           
                           ),
+                          // las que se tenian que haber consumido, pero no se ha hecho
+                          //aparecerán en rojo
                         color: Colors.redAccent,
                       ),
                       width: 200,
@@ -392,6 +403,7 @@ class VentanaPrincipal extends StatelessWidget {
                               ),
                             
                             const Row(
+                              //fotos de la caja y las pastillas, para más facilidad
                               children: [
                                 Padding(
                                   padding:EdgeInsets.only(left: 20, top : 5),
@@ -508,7 +520,7 @@ class VentanaPrincipal extends StatelessWidget {
     ),
 
     //==================== FloatingButton ===========================
-
+    //boton flotante para agregar medicamentos
     floatingActionButton: FloatingActionButton(
       onPressed: (){
         final destino = MaterialPageRoute(builder: (_) => CrearMedicamento());

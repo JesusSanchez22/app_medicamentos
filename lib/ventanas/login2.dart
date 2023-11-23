@@ -1,11 +1,15 @@
 
 
+import 'package:app_medicamentos/ventanas/bienvenida.dart';
 import 'package:app_medicamentos/ventanas/crear_medicamento2.dart';
+import 'package:app_medicamentos/ventanas/login1.dart';
 import 'package:app_medicamentos/ventanas/ventana_principal.dart';
 import 'package:flutter/material.dart';
 
 
-class CrearMedicamento extends StatelessWidget {
+class Login2 extends StatelessWidget {
+
+  //pregunto los datos necesarios para el registro
 
   @override
   Widget build(BuildContext context) {
@@ -46,32 +50,44 @@ class CrearMedicamento extends StatelessWidget {
               
             
               Padding(
-                padding: EdgeInsets.only(top: 70),
-                child: Text("Agregar medicamento",
+                padding: EdgeInsets.only(top: 150),
+                child: Text("Introduzca el correo",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 40,
+                  fontSize: 35,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   
                 ),),
               ),
+              SizedBox(
+               width: 350,
+               height:70,
+               child: TextField(
+                
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white, width: 3),
 
+                  ),
+                  
+                ),
+
+               ),
+             ),
+              
               Padding(
-                padding: const EdgeInsets.only(top: 70, bottom: 10),
-                child: Text("¿Cada cuánto debe tomar el medicamento?",
+                padding: EdgeInsets.only(top: 50),
+                child: Text("Introduzca el nombre",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 25,
+                  fontSize: 35,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   
                 ),),
               ),
-             
-
-             //hago los textfield con bordes para que se vean bien
-             SizedBox(
+              SizedBox(
                width: 350,
                height:70,
                child: TextField(
@@ -87,23 +103,22 @@ class CrearMedicamento extends StatelessWidget {
                ),
              ),
 
-              Padding(
-                padding: const EdgeInsets.only(top: 80, bottom: 10),
-                child: Text("¿Cuánta cantidad viene en cada envase?",
+             Padding(
+                padding: EdgeInsets.only(top: 50),
+                child: Text("Introduzca la contraseña",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 25,
+                  fontSize: 30,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   
                 ),),
               ),
-             
-             SizedBox(
+              SizedBox(
                width: 350,
-               height: 150,
+               height:70,
                child: TextField(
-                
+                obscureText: true,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.white, width: 3),
@@ -129,9 +144,8 @@ class CrearMedicamento extends StatelessWidget {
     ),
 
     //==================== Menú inferior ===========================
-
-    //hago la barra inferior con 3 botones con iconos, para que sea más intuitivo
-    bottomNavigationBar: BottomNavigationBar(
+bottomNavigationBar: BottomNavigationBar(
+  
     
       showSelectedLabels: false,
       showUnselectedLabels: false,
@@ -146,14 +160,7 @@ class CrearMedicamento extends StatelessWidget {
             label: "Atrás",
             
 
-            ),
-            BottomNavigationBarItem(
-            //ajuste del icono del boton inferior
-            icon: Icon(
-              Icons.home,
-              color: Colors.green,
-              ),
-            label: "Inicio",
+           
             
             
             ),
@@ -165,23 +172,20 @@ class CrearMedicamento extends StatelessWidget {
         onTap: (value){
           switch(value){
             case 0:
-              final destino = MaterialPageRoute(builder: (_) => VentanaPrincipal());
+              final destino = MaterialPageRoute(builder: (_) => Login1());
               Navigator.push(context, destino);
             break;
 
+            
             case 1:
               final destino = MaterialPageRoute(builder: (_) => VentanaPrincipal());
-              Navigator.push(context, destino);
-            break;
-            
-            case 2:
-              final destino = MaterialPageRoute(builder: (_) => CrearMedicamento2());
               Navigator.push(context, destino);
             break;
           }
         }
 
     )
+    
     );
   }
 }
