@@ -78,6 +78,9 @@ class Login1 extends StatelessWidget {
                   Column(
                     
                     // hago iconos muy grandes para que sea lo más fácil posible
+                    // seleccionariamos un icono y luego seguiríamos con el registro
+                    // en caso de seleccionar que la app es para alguien más, aparecería especificado
+                    // el nombre de la persona, en los distintos listview
 
                     children: [
                       Icon(

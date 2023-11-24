@@ -118,6 +118,7 @@ class Login2 extends StatelessWidget {
                width: 350,
                height:70,
                child: TextField(
+                //propiedad para que el texto que escribamos no se vea, para más seguridad
                 obscureText: true,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(

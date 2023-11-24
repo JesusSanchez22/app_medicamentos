@@ -46,7 +46,7 @@ class CrearMedicamento extends StatelessWidget {
               
             
               Padding(
-                padding: EdgeInsets.only(top: 70),
+                padding: EdgeInsets.only(top: 40),
                 child: Text("Agregar medicamento",
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -58,8 +58,8 @@ class CrearMedicamento extends StatelessWidget {
               ),
 
               Padding(
-                padding: const EdgeInsets.only(top: 70, bottom: 10),
-                child: Text("¿Cada cuánto debe tomar el medicamento?",
+                padding: const EdgeInsets.only(top: 50, bottom: 10),
+                child: Text("¿Cómo se llama el medicamento?",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25,
@@ -88,7 +88,38 @@ class CrearMedicamento extends StatelessWidget {
              ),
 
               Padding(
-                padding: const EdgeInsets.only(top: 80, bottom: 10),
+                padding: const EdgeInsets.only(top: 20, bottom: 10),
+                child: Text("¿Cada cuántas horas debe tomar el medicamento?",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  
+                ),),
+              ),
+             
+
+             //hago los textfield con bordes para que se vean bien
+             SizedBox(
+               width: 350,
+               height:70,
+               child: TextField(
+                //le indico que al seleccionar el textfield, me salga por defecto el teclado numérico
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white, width: 3),
+
+                  ),
+                  
+                ),
+
+               ),
+             ),
+
+              Padding(
+                padding: const EdgeInsets.only(top: 40, bottom: 10),
                 child: Text("¿Cuánta cantidad viene en cada envase?",
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -103,7 +134,7 @@ class CrearMedicamento extends StatelessWidget {
                width: 350,
                height: 150,
                child: TextField(
-                
+                keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.white, width: 3),

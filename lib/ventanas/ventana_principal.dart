@@ -11,6 +11,10 @@ class VentanaPrincipal extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return Scaffold(
+
+      //Me falta usar un drawer, o endDrawer, que según el diseño que tenia pensado no les veía mucho sentido
+      //en el futuro si añado más funcionalidades se puede pensar
+
       //==================== AppBar ===========================
    
 
@@ -50,6 +54,7 @@ class VentanaPrincipal extends StatelessWidget {
 
               
               //boton para reponer medicamentos, nos llevará a la farmacia más cercana
+              //de momento no nos toca hacer eso, asi que no nos redirige a nada
               Center(
                 child: TextButton(
                 style: ButtonStyle(
