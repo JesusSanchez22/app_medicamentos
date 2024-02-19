@@ -14,14 +14,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sqflite/sqflite.dart';
 
-//ventana para crear un nuevo medicamento
-class CrearMedicamento extends StatefulWidget {
+class ModificarMedicamento extends StatefulWidget {
+  final Map<String, dynamic> medicamentoData;
+
+  ModificarMedicamento({required this.medicamentoData});
+
   @override
-  _CrearMedicamentoState createState() => _CrearMedicamentoState();
+  _ModificarMedicamentoState createState() => _ModificarMedicamentoState();
 }
 
-class _CrearMedicamentoState extends State<CrearMedicamento> {
-  //variables que voy a usar
+class _ModificarMedicamentoState extends State<ModificarMedicamento> {
   Medicamento medicamento = new Medicamento();
   CameraController? controller;
   String imagePath = "";
@@ -30,15 +32,13 @@ class _CrearMedicamentoState extends State<CrearMedicamento> {
 
   DBHelper dbHelper = DBHelper();
 
-  //llamo al método para iniciar la cámara al abrir la ventana
   @override
   void initState() {
     super.initState();
     initializeCamera();
+    medicamento = Medicamento.fromMap(widget.medicamentoData);
   }
 
-  //método para iniciar la cámara
-  //primero controlará que haya alguna cámara disponible
   @override
   Future<void> initializeCamera() async {
     Database? database = await dbHelper.database;
@@ -59,10 +59,9 @@ class _CrearMedicamentoState extends State<CrearMedicamento> {
   @override
   Widget build(BuildContext context) {
     final temaActual = Provider.of<TemaProvider>(context);
-
     return Scaffold(
       drawer: MyDrawer(),
-      appBar: MyAppBar(titleText: "Agregar medicamento"),
+      appBar: MyAppBar(titleText: "Modificar medicamento"),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
@@ -73,7 +72,7 @@ class _CrearMedicamentoState extends State<CrearMedicamento> {
                   "Datos generales",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: temaActual.temaActual.colorScheme.onSecondary,
+                    color: Colors.white,
                   ),
                 ),
                 tileColor: temaActual.temaActual.colorScheme.secondary,
@@ -86,23 +85,18 @@ class _CrearMedicamentoState extends State<CrearMedicamento> {
                     hintText: 'Introduce el nombre del medicamento',
                     icon: Icon(Icons.medication),
                   ),
-
-                  //controlo que los campos no estén vacíos para
-                  //poder crear un medicamento
                   validator: (valor) {
                     if (valor == null || valor.isEmpty) {
                       return 'Por favor, introduce el nombre del medicamento';
                     }
                     return null;
                   },
-
-                  //voy añadiendo los datos de cada campo en el
-                  //objeto medicamento que he creado al inicio
                   onSaved: (valor) {
                     if (valor != null) {
                       medicamento.nombre = valor;
                     }
                   },
+                  initialValue: medicamento.nombre,
                 ),
               ),
               Container(
@@ -124,6 +118,7 @@ class _CrearMedicamentoState extends State<CrearMedicamento> {
                       medicamento.descripcion = valor;
                     }
                   },
+                  initialValue: medicamento.descripcion,
                 ),
               ),
               Divider(
@@ -150,20 +145,13 @@ class _CrearMedicamentoState extends State<CrearMedicamento> {
                         color: temaActual.temaActual.colorScheme.onPrimary,
                       ),
                     ),
-
-                    //creo un icono que al ser clicado abrirá la
-                    //cámara y sacará una foto
                     IconButton(
                       icon: Icon(Icons.add_a_photo),
                       onPressed: () async {
-                        //creo una variable image con la imagen que acabo de obtener
                         final image = await controller!.takePicture();
                         setState(() {
-                          //guardo el path de la imagen en una variable
                           imagePath = image.path;
-
-                          //inserto el path en el medicamento que he creado
-                          //en este caso, en imagenMedicamento
+                          print("ruta:" + imagePath);
                           medicamento.imagenMedicamento = imagePath;
 
                           onSaved:
@@ -179,19 +167,13 @@ class _CrearMedicamentoState extends State<CrearMedicamento> {
                         color: temaActual.temaActual.colorScheme.onPrimary,
                       ),
                     ),
-                    //creo un icono que al ser clicado abrirá la
-                    //cámara y sacará una foto
                     IconButton(
                       icon: Icon(Icons.add_a_photo),
                       onPressed: () async {
-                        //creo una variable image con la imagen que acabo de obtener
                         final image = await controller!.takePicture();
                         setState(() {
-                          //guardo el path de la imagen en una variable
                           imagePath = image.path;
-
-                          //inserto el path en el medicamento que he creado
-                          //en este caso, en imagenEnvase
+                          print("ruta:" + imagePath);
                           medicamento.imagenEnvase = imagePath;
 
                           onSaved:
@@ -204,9 +186,6 @@ class _CrearMedicamentoState extends State<CrearMedicamento> {
                   ],
                 ),
               ),
-
-              //si el path de la imagen se ha creado correctamente
-              //aparecerá dicha imagen en la pantalla
               if (imagePath != "")
                 Container(
                   width: 300,
@@ -219,7 +198,7 @@ class _CrearMedicamentoState extends State<CrearMedicamento> {
                 color: temaActual.temaActual.colorScheme.surface,
               ),
               ListTile(
-                title: const Text(
+                title: Text(
                   "Cantidades",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -252,6 +231,7 @@ class _CrearMedicamentoState extends State<CrearMedicamento> {
                             medicamento.cantidadActual = int.parse(valor);
                           }
                         },
+                        initialValue: medicamento.cantidadActual.toString(),
                       ),
                     ),
                     Expanded(
@@ -275,6 +255,7 @@ class _CrearMedicamentoState extends State<CrearMedicamento> {
                                 (cActual == null) ? 0 : cActual;
                           }
                         },
+                        initialValue: medicamento.cantidadPorEnvase.toString(),
                       ),
                     ),
                   ],
@@ -306,21 +287,16 @@ class _CrearMedicamentoState extends State<CrearMedicamento> {
                                 (cMinima == null) ? 0 : cMinima;
                           }
                         },
+                        initialValue: medicamento.cantidadMinima.toString(),
                       ),
                     ),
                   ],
                 ),
               ),
-              Divider(
-                color: temaActual.temaActual.colorScheme.surface,
-              ),
             ],
           ),
         ),
       ),
-
-      //creo un navigation bar para tener la opción
-      //de ir hacia atrás o de confirmar la inserción
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
@@ -330,6 +306,13 @@ class _CrearMedicamentoState extends State<CrearMedicamento> {
           BottomNavigationBarItem(
             icon: Icon(Icons.skip_previous, color: Colors.green),
             label: "Atrás",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.delete,
+              color: Colors.green,
+            ),
+            label: "Eliminar",
           ),
           BottomNavigationBarItem(
             icon: Icon(
@@ -348,6 +331,11 @@ class _CrearMedicamentoState extends State<CrearMedicamento> {
               break;
 
             case 1:
+              _eliminarMedicamento();
+
+              break;
+
+            case 2:
               _guardarMedicamento();
               final destino = MaterialPageRoute(
                   builder: (_) => Ventana_lista_medicamentos());
@@ -359,12 +347,46 @@ class _CrearMedicamentoState extends State<CrearMedicamento> {
     );
   }
 
-  //método para guardar el medicamento en la base de datos
   void _guardarMedicamento() async {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
 
-      await dbHelper.insertMedicamento(medicamento);
+      medicamento.imagenMedicamento = imagePath;
+
+      await dbHelper.updateMedicamento(medicamento);
     }
+  }
+
+  void _eliminarMedicamento() async {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Confirmación"),
+            content:
+                Text("¿Estás seguro de que deseas eliminar este medicamento?"),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(false);
+                },
+                child: Text("Cancelar"),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                },
+                child: Text("Aceptar"),
+              )
+            ],
+          );
+        }).then((confirmed) {
+      if (confirmed != null && confirmed) {
+        dbHelper.deleteMedicamento(medicamento);
+        final destino =
+            MaterialPageRoute(builder: (_) => Ventana_lista_medicamentos());
+        Navigator.push(context, destino);
+      } else {}
+    });
   }
 }
